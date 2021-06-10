@@ -1,0 +1,62 @@
+.btn {
+    background-color: white;
+    border: #e9e9e9 1px solid;
+    font-size: 14px;
+    padding: 0px 14px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 38px;
+}
+
+.btn.btn-cancel {
+    padding: 0 34px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    font-size: 12px;
+}
+
+.btn.btn-save {
+    padding: 0 34px;
+    height: 32px;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    right: 16px;
+    background-color: #00abfe;
+}
+
+.btn-add-asset {
+    padding: 0 36px;
+    color: white;
+    background-color: #00abfe;
+    border: none;
+}
+
+.btn.btn-add-asset:hover,
+.btn.btn-save:hover {
+    background-color: #29b8ff;
+}
+
+.btn.btn-close,
+.btn.btn-help {
+    border: none;
+}
+
+.btn.btn-close:hover,
+.btn.btn-help:hover {
+    background-color: transparent;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: rgba(214, 214, 214, 0.829);
+}
+.btn {
+    height: 34px;
+    box-sizing: border-box;
+     padding: 0 28px !important;
+}

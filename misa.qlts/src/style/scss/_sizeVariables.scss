@@ -1,0 +1,8 @@
+$header-height: 60px;
+$navbar-width-max: 210px;
+$navbar-width-min: 60px;
+$footer-height: 80px;
+:export {
+    navbarWidthMax: $navbar-width-max;
+    navbarWidthMin: $navbar-width-min;
+}

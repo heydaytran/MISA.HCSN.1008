@@ -1,0 +1,63 @@
+input {
+    padding: 8px 16px;
+    outline: none;
+    border: #beccc9 1px solid;
+}
+
+
+
+.input-search {
+    width: 200px;
+    padding: 8px 46px 8px 16px;
+    border: 1px solid #beccc9;
+}
+
+.input-field .input-black {
+    background-color: #f5f5f5;
+    pointer-events: none;
+}
+
+.input-field .input-two-third {
+    width: 437px;
+}
+
+.v-select__slot{
+    border: 1px solid #beccc9;
+    border-bottom: none;
+}
+
+
+.custom-autocomplete input {
+    border: none;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+~.custom-autocomplete .v-select__slot {
+    border: #e4e4e4 1px solid;
+}
+
+.v-text-field>.v-input__control>.v-input__slot:before {
+    border-style: none;
+}
+
+.v-input {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.v-text-field__details {
+    display: none;
+}
+
+.v-input__slot {
+    margin-bottom: 0px;
+}
+
+.v-list-item__content .v-list-item__title {
+    font-size: 14px;
+}
+.v-select__slot {
+    padding-left: 10px;
+}
+

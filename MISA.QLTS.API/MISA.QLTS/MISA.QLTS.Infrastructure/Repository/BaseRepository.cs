@@ -45,17 +45,25 @@ namespace MISA.QLTS.Infrastructure.Repository
             _dbConnection = new MySqlConnection(_connectionString);
         }
 
-
+        /// <summary>
+        /// TODO lấy toàn bộ dữ liệu
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<T> GetEntities()
         {
-           // Thực hiện lấy dữ liệu từ Database
-           var entities = _dbConnection.Query<T>(
-               $"Proc_Get{_tableName}",
-               commandType: CommandType.StoredProcedure);
+            // Thực hiện lấy dữ liệu từ Database
+            var entities = _dbConnection.Query<T>(
+                $"Proc_Get{_tableName}",
+                commandType: CommandType.StoredProcedure);
 
             return entities;
         }
 
+        /// <summary>
+        /// TODO lấy dữ liệu theo ID
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
         public T GetById(Guid entityId)
         {
             // Thực hiện lấy thông tin một đối tượng
@@ -68,14 +76,19 @@ namespace MISA.QLTS.Infrastructure.Repository
 
         }
 
+        /// <summary>
+        /// TODO thêm 1 bản ghi
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public int Insert(T entity)
         {
             try
             {
                 if (_dbConnection.State != ConnectionState.Open)
                     _dbConnection.Open();
-                    var result = _dbConnection.Execute($"Proc_Insert{_tableName}", commandType: CommandType.StoredProcedure, param: entity);
-                    return result;
+                var result = _dbConnection.Execute($"Proc_Insert{_tableName}", commandType: CommandType.StoredProcedure, param: entity);
+                return result;
             }
             catch (Exception e)
             {
@@ -84,10 +97,16 @@ namespace MISA.QLTS.Infrastructure.Repository
             }
         }
 
+
+        /// <summary>
+        /// TODO Sửa 1 bản ghi
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public int Update(T entity)
         {
             // thực hiện cập nhật cơ sở dữ liệu
-           
+
             try
             {
                 if (_dbConnection.State != ConnectionState.Open)
@@ -111,13 +130,17 @@ namespace MISA.QLTS.Infrastructure.Repository
         }
 
 
-       
+        /// <summary>
+        /// TODO xóa 1 bản ghi
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
         public int Delete(Guid entityId)
         {
-             // Thực hiện xóa dữ liệu từ Database:
+            // Thực hiện xóa dữ liệu từ Database:
             try
             {
-                if(_dbConnection.State !=ConnectionState.Open) _dbConnection.Open();
+                if (_dbConnection.State != ConnectionState.Open) _dbConnection.Open();
 
                 var dynamicProperty = new DynamicParameters();
                 dynamicProperty.Add($"@{_tableName}Id", entityId);
@@ -132,7 +155,10 @@ namespace MISA.QLTS.Infrastructure.Repository
 
         }
 
-    
+        /// <summary>
+        /// TODO lấy khóa chính
+        /// </summary>
+        /// <returns></returns>
         public PropertyInfo GetKeyProperty()
         {
             var keyProperty = typeof(T)
@@ -148,6 +174,6 @@ namespace MISA.QLTS.Infrastructure.Repository
             _dbConnection.Dispose();
         }
 
-       
+
     }
 }

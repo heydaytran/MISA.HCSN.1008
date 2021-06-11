@@ -1,14 +1,14 @@
 <template>
   <div>
     <div v-show="isActive" class="modal">
-      <div class="modal-background" ></div>
+      <div class="modal-background"></div>
       <div>
         <div v-show="isChange" class="div-container modal1">
           <div class="modal-background"></div>
           <div class="modal1-content">
             <div class="modal1-header">
               Dữ liệu chưa được lưu
-              <span @click="hide('','continue')"
+              <span @click="hide('', 'continue')"
                 ><div data-v-1b34bf39="" class="icon-cancel btn btn-close"></div
               ></span>
             </div>
@@ -16,12 +16,37 @@
               Dữ liệu thay đổi, bạn có muốn lưu không? <br />
             </div>
             <div class="modal1-footer">
-              <div style="width:86px; justify-content: center; background: #1BA3C9;" class="btn btn-save-fake" @click="save()">Lưu</div>
-              <div style="width:86px; justify-content: center; border:1px solid #1BA3C9;" class="btn" @click="hide()">Không lưu</div>
-              <div style="width:86px; justify-content: center;" class="btn" @click="hide('','continue')">Hủy bỏ</div>
+              <div
+                style="
+                  width: 86px;
+                  justify-content: center;
+                  background: #1ba3c9;
+                "
+                class="btn btn-save-fake"
+                @click="save()"
+              >
+                Lưu
+              </div>
+              <div
+                style="
+                  width: 86px;
+                  justify-content: center;
+                  border: 1px solid #1ba3c9;
+                "
+                class="btn"
+                @click="hide()"
+              >
+                Không lưu
+              </div>
+              <div
+                style="width: 86px; justify-content: center"
+                class="btn"
+                @click="hide('', 'continue')"
+              >
+                Hủy bỏ
+              </div>
             </div>
           </div>
-          
         </div>
       </div>
       <div class="modal-content">
@@ -283,6 +308,7 @@
                       </td>
                       <td style="text-align: right; text-overflow: unset">
                         <input
+                          id="origin-price"
                           class="inputMoney"
                           style="
                             width: 114px;
@@ -290,18 +316,18 @@
                             text-overflow: ellipsis;
                           "
                           type="text"
-                          @click="addBorder($event)"
-                          @blur="removeBorder($event)"
                           v-model="item.originalPrice"
                           :title="item.originalPrice"
                           v-money="money"
                           maxlength="20"
-                          @keyup="updateResidual(item, index)"
+                          @keyup="updateResidual(item, $event, 'origin')"
                           onClick="this.select();"
+                          :class="{alert: item.originalPrice < item.wearValue}"
                         />
                       </td>
                       <td style="text-align: right; text-overflow: unset">
                         <input
+                          id="wear-value"
                           style="
                             width: 103px;
                             text-align: right;
@@ -310,18 +336,18 @@
                           type="text"
                           onClick="this.select();"
                           class="inputMoney"
-                          @click="addBorder($event)"
-                          @blur="removeBorder($event)"
                           v-model="item.wearValue"
                           :title="item.wearValue"
                           v-money="money"
                           maxlength="20"
-                          @keyup="updateResidual(item, index)"
+                          @keyup="updateResidual(item, $event, 'wear')"
+                          @keypress="validateInputMoney(item, $event, 'wear')"
+                           @blur="validateInputMoney(item, $event, 'blur')"
                         />
                       </td>
 
                       <td
-                        class="no-border-right"
+                        class="res-value no-border-right"
                         style="text-align: right; text-overflow: ellipsis"
                         :title="item.resValue | formatMoney(item.resValue)"
                       >
@@ -376,7 +402,9 @@
           </div>
         </div>
         <div class="footer">
-          <div class="btn btn-cancel" tabindex="0" @click="hide('close')">Hủy</div>
+          <div class="btn btn-cancel" tabindex="0" @click="hide('close')">
+            Hủy
+          </div>
 
           <div class="btn btn-save" tabindex="0" @click="save('all')">Lưu</div>
         </div>
@@ -500,10 +528,78 @@ export default {
       listResPrice: [],
       assetIncreaseCompare: "",
       isChange: false,
+      validInputMoney:true
     };
   },
 
   methods: {
+    //TODO chỉ cho phép nhập số
+    onlyNumber(e) {
+      var trapNumber = /[0-9\/]+/;
+      if (!trapNumber.test(e.key)) {
+        e.preventDefault();
+        return
+      }
+    },
+
+    //TODO validate khi thay đổi đơn giá và giá trị hao mòn
+    validateInputMoney(item, e, text) {
+      this.onlyNumber(e);
+      //debugger; // eslint-disable-line no-debugger
+      if(text == 'blur')
+      {
+        var origin = document.getElementById("origin-price")._value;
+        var wear = document.getElementById("wear-value")._value;
+
+        origin = this.fomatMoneyToNumber(origin);
+        wear = this.fomatMoneyToNumber(wear);
+        if(origin >= wear)
+        {
+          this.validInputMoney = true
+           document
+        .getElementsByClassName("inputMoney")
+        .forEach((e) => (e.style.border = "1px solid black"));
+        }
+        else this.validInputMoney = false
+      }
+      console.log(item);
+      document
+        .getElementsByClassName("inputMoney")
+        .forEach((e) => (e.style.border = "1px solid black"));
+
+      if (text == "wear") {
+        var origin = document.getElementById("origin-price")._value;
+        var wear = document.getElementById("wear-value")._value ;
+
+        origin = this.fomatMoneyToNumber(origin);
+        wear = this.fomatMoneyToNumber(wear);
+
+        if (origin < wear) {
+          e.target.style.border = "1px solid red";
+          var trapNumber = /[0-9\/]+/;
+          if (trapNumber.test(e.key)) {
+            e.preventDefault();
+          }
+          this.validInputMoney = false
+        } else {
+          this.validInputMoney = true
+          e.target.style.border = "1px solid black";
+        }
+      } else {
+        var origin = document.getElementById("origin-price")._value + e.key;
+        var wear = document.getElementById("wear-value")._value;
+
+        origin = this.fomatMoneyToNumber(origin);
+        wear = this.fomatMoneyToNumber(wear);
+        if (origin < wear) {
+          e.target.style.border = "1px solid red";
+          this.validInputMoney = false
+        } else {
+          this.validInputMoney =  true
+          e.target.style.border = "1px solid black";
+        }
+      }
+    },
     // todo cập nhật giá trị còn lại
     updateResidual(item) {
       typeof item.originalPrice === "string"
@@ -514,6 +610,40 @@ export default {
         : item.wearValue;
 
       item.resValue = item.originalPrice - item.wearValue;
+
+      // if(e!='view'){
+
+      //   if(text == 'origin')
+      //   {
+      //     if(item.originalPrice - item.wearValue  < 0 )
+      //     {
+      //       e.target.style.border = '1px solid red'
+      //     }
+      //     else{
+      //        e.target.style.border = '1px solid black'
+      //       item.resValue = item.originalPrice - item.wearValue;
+      //     }
+      //   }
+      //   else if(text == 'wear')
+      //   {
+      //     if(item.originalPrice - item.wearValue  < 0 )
+      //     {
+      //   const number = /[0-9\/]+/;
+      //       if (number.test(e.key)) {
+      //       e.preventDefault();
+      //       }
+      //       e.target.style.border = '1px solid red'
+      //     }
+      //     else{
+      //        e.target.style.border = '1px solid black'
+      //       item.resValue = item.originalPrice - item.wearValue;
+
+      //     }
+      //   }
+      // }
+      // else{
+
+      // }
     },
     //todo thêm border khi click vào input money
     addBorder(e) {
@@ -554,6 +684,7 @@ export default {
       var res = this;
       this.isActive = true;
       this.dup = false;
+      this.validInputMoney = true
 
       var warning = document.getElementById("assetInput1");
 
@@ -602,27 +733,32 @@ export default {
 
     // todo ẩn dialog
     hide(text1, text2) {
-      if (
-        this.formMode == "update" &&
-        text1 == "close" 
-        
-      ) {
-        if(this.assetIncreaseCompare != JSON.stringify(this.assetIncrease) || JSON.stringify(this.listAssetView) != JSON.stringify(this.assetIncrease.increaseDetail))
-        this.isChange = true;
-      }
-      else if(text2=='continue')
-      {
-          this.isChange = false
-          return
-      }
-      else
-      {
-        this.isChange = false
+      if (this.formMode == "update" && text1 == "close") {
+        if (
+          this.assetIncreaseCompare != JSON.stringify(this.assetIncrease) ||
+          JSON.stringify(this.listAssetView) !=
+            this.assetIncrease.increaseDetail
+        )
+         {
+            this.isChange = true;
+         }
+         else 
+         {
+           this.isChange = false
+           this.isActive = false
+           return
+         }
+
+      } else if (text2 == "continue") {
+        this.isChange = false;
+        return;
+      } else {
+        this.isChange = false;
         this.isActive = false;
-      document.getElementsByClassName("body-right")[0].style.zIndex = "0";
-      this.assetIncrease.increaseDate = null;
-      this.assetIncrease.exhibitDate = null;
-      this.$emit("statusForm", "");
+        document.getElementsByClassName("body-right")[0].style.zIndex = "0";
+        this.assetIncrease.increaseDate = null;
+        this.assetIncrease.exhibitDate = null;
+        this.$emit("statusForm", "");
       }
     },
 
@@ -728,7 +864,7 @@ export default {
           .then((Response) => {
             var dat = Response.data.data;
             res.$set(dat, "resValue", 0);
-            this.updateResidual(dat);
+            this.updateResidual(dat, "view");
             res.listAssetView.push(dat);
 
             i++;
@@ -775,7 +911,8 @@ export default {
       if (
         this.assetIncrease.exhibitCode == null ||
         this.assetIncrease.exhibitDate == null ||
-        this.assetIncrease.increaseDate == null
+        this.assetIncrease.increaseDate == null ||
+        this.validInputMoney == false
       ) {
         return;
       } else {
@@ -786,6 +923,7 @@ export default {
         }
         //todo cập nhập lại danh sách các tài sản ghi tăng theo dạng text
         this.assetIncrease.increaseDetail = JSON.stringify(this.listAssetView);
+        this.assetIncrease.exhibitCode = this.assetIncrease.exhibitCode.replace(/^\s+|\s+$/gm,'');
         if (this.formMode == "insert") {
           //nếu là form thêm dữ liệu
           await axios
@@ -2360,40 +2498,52 @@ table tbody tr td:nth-child(5) {
   padding: 0 !important;
 }
 .div-container.modal1 {
-    position: relative;
-    top: calc(50vh - 153px);
-    z-index: 2;
+  position: relative;
+  top: calc(50vh - 153px);
+  z-index: 2;
 }
 .modal .modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black;
-    opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.8;
 }
 .btn.btn-save {
-    position: absolute;
-    right: 19px;
-    background: #1BA3C9;
+  position: absolute;
+  right: 19px;
+  background: #1ba3c9;
 }
-.btn-save-fake:hover{
-background:#29b8ff!important;
+.btn-save-fake:hover {
+  background: #29b8ff !important;
 }
-.btn-save-fake{
+.btn-save-fake {
   color: white;
 }
 .icon-help {
-    background-repeat: no-repeat;
-    background-size: 18px 18px;
-    background-position: center;
-    width: 30px;
-    margin-right: 32px;
-    margin-top: 5px;
-    height: 30px;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: center;
+  width: 30px;
+  margin-right: 32px;
+  margin-top: 5px;
+  height: 30px;
 }
 .input-sm .datetime {
-    background-position: 184px center;
+  background-position: 184px center;
+}
+.inputMoney {
+  border: 1px solid #000000;
+  height: 30px;
+  background-clip: padding-box;
+}
+table tr td:nth-child(7) {
+  width: 130px;
+}
+
+.alert {
+  border-color: red !important;
 }
 </style>

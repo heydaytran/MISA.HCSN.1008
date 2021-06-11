@@ -221,14 +221,12 @@
             <div class="btn btn-cancel" tabindex="0" @click="hide()">
               Hủy bỏ
             </div>
-
             <div class="btn btn-save" tabindex="0" @click="sendAssetList()">
               Đồng ý
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -572,16 +570,7 @@ export default {
               }
             }
             break;
-          case 37:
-            {
-              res.backPage();
-            }
-            break;
-          case 39:
-            {
-              res.nextPage();
-            }
-            break;
+        
           default: {
             return true;
           }

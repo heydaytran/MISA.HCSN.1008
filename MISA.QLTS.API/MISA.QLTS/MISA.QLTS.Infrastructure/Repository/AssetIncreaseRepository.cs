@@ -42,6 +42,13 @@ namespace MISA.QLTS.Infrastructure.Repository
             return false;
         }
 
+        /// <summary>
+        /// TODO Filter dữ liệu và phân trang( phân trang chức năng tạm bỏ qua)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="recordAmount"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
         public IEnumerable<AssetIncrease> GetEntitiesFilter(string input, int recordAmount, int pageNumber)
         {
             DynamicParameters parameters = new DynamicParameters();

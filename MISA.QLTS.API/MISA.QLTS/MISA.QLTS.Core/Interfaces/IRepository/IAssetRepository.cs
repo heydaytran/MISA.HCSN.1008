@@ -13,7 +13,15 @@ namespace MISA.QLTS.Core.Interfaces
     /// author: TVThinh 12.05.2021
     public interface IAssetRepository : IBaseRepository<Asset>
     {
+        /// <summary>
+        /// Check trùng mã
+        /// </summary>
+        /// <param name="assetId"> ID</param>
+        /// <param name="assetCode"> mã tài sản</param>
+        /// <param name="functionName">thao tác sửa hay xóa</param>
+        /// <returns></returns>
         public bool CheckStoreCode(Guid? assetId, string assetCode, string functionName);
+
         /// <summary>
         /// Lấy dữ liệu theo điều kiện( tìm kiếm)
         /// </summary>

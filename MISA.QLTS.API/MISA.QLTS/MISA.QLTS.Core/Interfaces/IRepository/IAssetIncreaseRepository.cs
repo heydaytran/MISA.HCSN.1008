@@ -12,9 +12,9 @@ namespace MISA.QLTS.Core.Interfaces.IRepository
         /// <summary>
         /// Check trùng mã 
         /// </summary>
-        /// <param name="assetIncreaseId"></param>
-        /// <param name="assetIncreaseCode"></param>
-        /// <param name="functionName"></param>
+        /// <param name="assetIncreaseId">ID</param>
+        /// <param name="assetIncreaseCode">Mã chứng từ ghi tăng</param>
+        /// <param name="functionName">Thao tác sửa or xóa</param>
         /// <returns>true: trùng, false: không trùng</returns>
         /// author : TVTHINH 1/6/2021
         public bool CheckAssetIcreaseCode(Guid? assetIncreaseId, string assetIncreaseCode, string functionName);

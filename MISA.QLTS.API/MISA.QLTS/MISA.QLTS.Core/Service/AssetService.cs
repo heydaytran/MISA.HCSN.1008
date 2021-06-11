@@ -19,7 +19,7 @@ namespace MISA.QLTS.Core.Service
         }
 
 
-
+        // TODO filter dữ liệu và phân trang
         public ResponseResult GetEntitiesFilter(string input, int recordAmount, int pageNumber, string departmentId, string typeId)
         {
             var entities = _unitOfWork.Asset.GetEntitiesFilter(input, recordAmount, pageNumber, departmentId, typeId).ToList();
@@ -80,6 +80,7 @@ namespace MISA.QLTS.Core.Service
 
         }
 
+        // TODO validate dữ liệu nhập từ client
         public override void Validate(ResponseResult responseResult, Asset entity, Guid? entityID, string functionName)
         {
             var propertyUnique = "Mã tài sản";

@@ -18,6 +18,10 @@ namespace MISA.QLTS.Web.Controllers
             _baseService = baseService;
         }
 
+        /// <summary>
+        /// TODO Lấy toàn bộ dữ liệu của đối tượng
+        /// </summary>
+        /// <returns></returns>
         // GET: api/<BaseController>
         [HttpGet]
         public IActionResult Get()
@@ -28,7 +32,11 @@ namespace MISA.QLTS.Web.Controllers
             return Ok(responseResult);
         }
 
-
+        /// <summary>
+        /// TODO lấy dữ liệu theo ID
+        /// </summary>
+        /// <param name="entityId">ID</param>
+        /// <returns></returns>
         // GET api/<BaseController>/5
         [HttpGet("{entityId}")]
         public IActionResult Get(Guid entityId)
@@ -38,7 +46,11 @@ namespace MISA.QLTS.Web.Controllers
             return Ok(responseResult);
         }
 
-        //
+        /// <summary>
+        /// TODO Insert 1 bản ghi 
+        /// </summary>
+        /// <param name="entity">Bản ghi được insert</param>
+        /// <returns></returns>
         // api/<BaseController>
         [HttpPost]
         public IActionResult Post([FromBody] T entity)
@@ -48,6 +60,11 @@ namespace MISA.QLTS.Web.Controllers
             return Ok(responseResult);
         }
 
+        /// <summary>
+        /// TODO Update 1 bản ghi
+        /// </summary>
+        /// <param name="entity">Bản ghi được update</param>
+        /// <returns></returns>
         // PUT api/<BaseController>/5
         [HttpPut]
         public IActionResult Put( [FromBody] T entity)
@@ -56,6 +73,11 @@ namespace MISA.QLTS.Web.Controllers
             return Ok(responseResult);
         }
 
+        /// <summary>
+        /// TODO Xóa 1 bản ghi theo ID
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
         // DELETE api/<BaseController>/5
         [HttpDelete("{entityId}")]
         public IActionResult Delete(Guid entityId)

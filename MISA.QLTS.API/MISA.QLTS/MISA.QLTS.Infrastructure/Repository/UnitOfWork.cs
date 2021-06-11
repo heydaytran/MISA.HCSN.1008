@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace MISA.EShop.Infrastructure.Repository
 {
+    /// <summary>
+    /// TODO xử lý nghiệp vụ chung của các đối tượng
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         public UnitOfWork(IAssetRepository asset, 

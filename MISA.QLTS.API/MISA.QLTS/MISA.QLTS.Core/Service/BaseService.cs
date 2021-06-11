@@ -20,6 +20,7 @@ namespace MISA.QLTS.Core.Service
             _baseRespository = baseRespository;
         }
 
+        // TODO lấy dữ liệu thông qua ID
         public ResponseResult GetById(Guid entityId)
         {
             var result = new ResponseResult();
@@ -51,6 +52,7 @@ namespace MISA.QLTS.Core.Service
             return result;
         }
 
+        // TODO Lấy toàn bộ dữ liệu
         public ResponseResult GetEntities()
         {
             var entities = _baseRespository.GetEntities();
@@ -73,6 +75,7 @@ namespace MISA.QLTS.Core.Service
             return result;
         }
 
+        // TODO Thêm bản ghi
         public ResponseResult Insert(T entity)
         {
             var result = new ResponseResult();
@@ -104,6 +107,8 @@ namespace MISA.QLTS.Core.Service
             return result;
         }
 
+
+        // TODO sửa bản ghi
         public ResponseResult Update(T entity)
         {
 
@@ -174,26 +179,26 @@ namespace MISA.QLTS.Core.Service
 
         }
 
-        /// <summary>
-        ///Hàm validate dữ liệu khi thực hiện thêm bản ghỉ
-        ///Cho phép kế thừa để thực hiện nghiệp vụ với đối tượng tương ứng
-        /// </summary>
-        /// <param name="entity">Thực thể cần thêm</param>
-        public virtual void ValidateInsert(T entity)
-        {
+        ///// <summary>
+        /////Hàm validate dữ liệu khi thực hiện thêm bản ghỉ
+        /////Cho phép kế thừa để thực hiện nghiệp vụ với đối tượng tương ứng
+        ///// </summary>
+        ///// <param name="entity">Thực thể cần thêm</param>
+        //public virtual void ValidateInsert(T entity)
+        //{
 
-        }
+        //}
 
-        /// <summary>
-        /// Hàm validate dữ liệu khi thực hiện sửa thông tin bản ghi
-        /// Cho phép kế thừa để thực hiện nghiệp vụ với đối tượng tương ứng
-        /// </summary>
-        /// <param name="entity">Thực thể cần sửa</param>
-        /// <param name="entiyId">ID của thực thể cần sửa</param>
-        public virtual void ValidateUpdate(T entity, Guid entiyId)
-        {
+        ///// <summary>
+        ///// Hàm validate dữ liệu khi thực hiện sửa thông tin bản ghi
+        ///// Cho phép kế thừa để thực hiện nghiệp vụ với đối tượng tương ứng
+        ///// </summary>
+        ///// <param name="entity">Thực thể cần sửa</param>
+        ///// <param name="entiyId">ID của thực thể cần sửa</param>
+        //public virtual void ValidateUpdate(T entity, Guid entiyId)
+        //{
 
-        }
+        //}
 
     }
 }

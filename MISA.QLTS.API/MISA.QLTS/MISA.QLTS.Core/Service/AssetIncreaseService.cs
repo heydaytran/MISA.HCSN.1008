@@ -18,6 +18,7 @@ namespace MISA.QLTS.Core.Service
             _unitOfWork = unitOfWork;
         }
 
+        // TODO filter dữ liệu và phân trang
         public ResponseResult GetEntitiesFilter(string input, int recordAmount, int pageNumber)
         {
             var entities = _unitOfWork.AssetIncrease.GetEntitiesFilter(input, recordAmount, pageNumber).ToList();
@@ -78,6 +79,7 @@ namespace MISA.QLTS.Core.Service
 
         }
 
+        // Hàm validate dữ liệu từ client
         public override void Validate(ResponseResult responseResult, AssetIncrease entity, Guid? entityID, string functionName)
         {
             var propertyUnique = "Mã chứng từ";
@@ -86,8 +88,25 @@ namespace MISA.QLTS.Core.Service
             propertyRequired.Add("Ngày chứng từ", entity.ExhibitDate.ToString());
             propertyRequired.Add("Ngày ghi tăng", entity.IncreaseDate.ToString());
 
+            foreach (var prop in entity.GetType().GetProperties())
+            {
+                // check kiểu dữ liệu truyền vào có convert sang kiểu datetime được không
+                if (prop.PropertyType.Name == "DateTime")
+                {
+                    try
+                    {
+                        DateTime.Parse(prop.GetValue(entity).ToString());
+                    }
+                    catch (Exception)
+                    {
+                        responseResult.UserMsg = "Ngày tháng sai định dạng";
+                    }
+                }
+            }
+
             foreach (var property in propertyRequired)
             {
+                //check trống
                 if (string.IsNullOrEmpty(property.Value))
                 {
                     responseResult.IsSuccess = false;
@@ -95,11 +114,24 @@ namespace MISA.QLTS.Core.Service
                     responseResult.DevMsg = property.Key + " " + Resource.ResourceMessage.Error_Required;
                     responseResult.UserMsg = property.Key + " " + Resource.ResourceMessage.Error_Required;
                 }
+
+                // check ngày lớn hơn hôm nay
+                if(property.Key != "Mã chứng từ")
+                {
+                    int i = DateTime.Compare(DateTime.Parse(property.Value), DateTime.Now);
+                    if( i > 0)
+                    {
+                        responseResult.IsSuccess = false;
+                        responseResult.ErrorCode = Enum.ErrorCode.BADREQUEST;
+                        responseResult.UserMsg = "Ngày tháng không hợp lệ";
+                    }    
+                }    
+
             }
 
             // kiểm tra xem trường nào là duy nhất (có thuộc tính Unique) thì check duplicate
 
-            bool checkDuplicateCode = _unitOfWork.AssetIncrease.CheckAssetIcreaseCode(entityID, entity.ExhibitCode, functionName);
+             bool checkDuplicateCode = _unitOfWork.AssetIncrease.CheckAssetIcreaseCode(entityID, entity.ExhibitCode, functionName);
 
             if (checkDuplicateCode)
             {

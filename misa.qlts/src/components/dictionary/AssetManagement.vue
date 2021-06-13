@@ -998,9 +998,6 @@ table tbody tr {
   }
 }
 
-table tbody tr td {
-  font-family: "GoogleSans";
-}
 .summary {
   display: flex;
 }

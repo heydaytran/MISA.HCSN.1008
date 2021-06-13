@@ -322,7 +322,7 @@
                           maxlength="20"
                           @keyup="updateResidual(item, $event, 'origin')"
                           onClick="this.select();"
-                          :class="{alert: item.originalPrice < item.wearValue}"
+                          @keypress="onlyNumber($event)"
                         />
                       </td>
                       <td style="text-align: right; text-overflow: unset">
@@ -341,8 +341,7 @@
                           v-money="money"
                           maxlength="20"
                           @keyup="updateResidual(item, $event, 'wear')"
-                          @keypress="validateInputMoney(item, $event, 'wear')"
-                           @blur="validateInputMoney(item, $event, 'blur')"
+                           @keypress="onlyNumber($event)"
                         />
                       </td>
 
@@ -528,7 +527,7 @@ export default {
       listResPrice: [],
       assetIncreaseCompare: "",
       isChange: false,
-      validInputMoney:true
+      validInputMoney: true,
     };
   },
 
@@ -538,70 +537,13 @@ export default {
       var trapNumber = /[0-9\/]+/;
       if (!trapNumber.test(e.key)) {
         e.preventDefault();
-        return
+        return;
       }
     },
 
-    //TODO validate khi thay đổi đơn giá và giá trị hao mòn
-    validateInputMoney(item, e, text) {
-      this.onlyNumber(e);
-      //debugger; // eslint-disable-line no-debugger
-      if(text == 'blur')
-      {
-        var origin = document.getElementById("origin-price")._value;
-        var wear = document.getElementById("wear-value")._value;
-
-        origin = this.fomatMoneyToNumber(origin);
-        wear = this.fomatMoneyToNumber(wear);
-        if(origin >= wear)
-        {
-          this.validInputMoney = true
-           document
-        .getElementsByClassName("inputMoney")
-        .forEach((e) => (e.style.border = "1px solid black"));
-        }
-        else this.validInputMoney = false
-      }
-      console.log(item);
-      document
-        .getElementsByClassName("inputMoney")
-        .forEach((e) => (e.style.border = "1px solid black"));
-
-      if (text == "wear") {
-        var origin = document.getElementById("origin-price")._value;
-        var wear = document.getElementById("wear-value")._value ;
-
-        origin = this.fomatMoneyToNumber(origin);
-        wear = this.fomatMoneyToNumber(wear);
-
-        if (origin < wear) {
-          e.target.style.border = "1px solid red";
-          var trapNumber = /[0-9\/]+/;
-          if (trapNumber.test(e.key)) {
-            e.preventDefault();
-          }
-          this.validInputMoney = false
-        } else {
-          this.validInputMoney = true
-          e.target.style.border = "1px solid black";
-        }
-      } else {
-        var origin = document.getElementById("origin-price")._value + e.key;
-        var wear = document.getElementById("wear-value")._value;
-
-        origin = this.fomatMoneyToNumber(origin);
-        wear = this.fomatMoneyToNumber(wear);
-        if (origin < wear) {
-          e.target.style.border = "1px solid red";
-          this.validInputMoney = false
-        } else {
-          this.validInputMoney =  true
-          e.target.style.border = "1px solid black";
-        }
-      }
-    },
+    
     // todo cập nhật giá trị còn lại
-    updateResidual(item) {
+    updateResidual(item, e, text) {
       typeof item.originalPrice === "string"
         ? (item.originalPrice = this.fomatMoneyToNumber(item.originalPrice))
         : item.originalPrice;
@@ -611,39 +553,30 @@ export default {
 
       item.resValue = item.originalPrice - item.wearValue;
 
-      // if(e!='view'){
-
-      //   if(text == 'origin')
-      //   {
-      //     if(item.originalPrice - item.wearValue  < 0 )
-      //     {
-      //       e.target.style.border = '1px solid red'
-      //     }
-      //     else{
-      //        e.target.style.border = '1px solid black'
-      //       item.resValue = item.originalPrice - item.wearValue;
-      //     }
-      //   }
-      //   else if(text == 'wear')
-      //   {
-      //     if(item.originalPrice - item.wearValue  < 0 )
-      //     {
-      //   const number = /[0-9\/]+/;
-      //       if (number.test(e.key)) {
-      //       e.preventDefault();
-      //       }
-      //       e.target.style.border = '1px solid red'
-      //     }
-      //     else{
-      //        e.target.style.border = '1px solid black'
-      //       item.resValue = item.originalPrice - item.wearValue;
-
-      //     }
-      //   }
-      // }
-      // else{
-
-      // }
+      if (e != "view") {
+        if (text == "origin") {
+          e.target.parentElement.nextElementSibling.firstElementChild.classList.remove('alert')
+          if (item.resValue < 0) {
+            this.validInputMoney = false
+            e.target.classList.add("alert");
+          } else {
+            this.validInputMoney = true
+            e.target.classList.remove("alert");
+          }
+        } else if (text == "wear") {
+          e.target.parentElement.previousElementSibling.firstElementChild.classList.remove('alert')
+          if (item.resValue < 0) {
+            this.validInputMoney = false
+            const number = /[0-9\/]+/;
+            
+            e.target.classList.add("alert");
+          } else {
+            this.validInputMoney = true
+            e.target.classList.remove("alert");
+          }
+        }
+      } else {
+      }
     },
     //todo thêm border khi click vào input money
     addBorder(e) {
@@ -680,11 +613,11 @@ export default {
     // todo hiển thị dialog thêm chứng từ ghi tăng
     async show() {
       this.turnOffValidate();
-
+      this.inputSearch = ''
       var res = this;
       this.isActive = true;
       this.dup = false;
-      this.validInputMoney = true
+      this.validInputMoney = true;
 
       var warning = document.getElementById("assetInput1");
 
@@ -738,17 +671,13 @@ export default {
           this.assetIncreaseCompare != JSON.stringify(this.assetIncrease) ||
           JSON.stringify(this.listAssetView) !=
             this.assetIncrease.increaseDetail
-        )
-         {
-            this.isChange = true;
-         }
-         else 
-         {
-           this.isChange = false
-           this.isActive = false
-           return
-         }
-
+        ) {
+          this.isChange = true;
+        } else {
+          this.isChange = false;
+          this.isActive = false;
+          return;
+        }
       } else if (text2 == "continue") {
         this.isChange = false;
         return;
@@ -911,11 +840,16 @@ export default {
       if (
         this.assetIncrease.exhibitCode == null ||
         this.assetIncrease.exhibitDate == null ||
-        this.assetIncrease.increaseDate == null ||
-        this.validInputMoney == false
+        this.assetIncrease.increaseDate == null 
       ) {
         return;
-      } else {
+      }
+      else if(
+        this.validInputMoney == false)
+        {
+          this.showWarning("Nguyên giá phải lớn hơn lũy kế")
+        }
+      else {
         // check đã chọn tài tải chưa
         if (this.listAssetView.length == 0) {
           this.showWarning("Vui lòng chọn tài sản ");
@@ -923,7 +857,10 @@ export default {
         }
         //todo cập nhập lại danh sách các tài sản ghi tăng theo dạng text
         this.assetIncrease.increaseDetail = JSON.stringify(this.listAssetView);
-        this.assetIncrease.exhibitCode = this.assetIncrease.exhibitCode.replace(/^\s+|\s+$/gm,'');
+        this.assetIncrease.exhibitCode = this.assetIncrease.exhibitCode.replace(
+          /^\s+|\s+$/gm,
+          ""
+        );
         if (this.formMode == "insert") {
           //nếu là form thêm dữ liệu
           await axios
@@ -1432,9 +1369,7 @@ input#assetSearchBox {
   padding-bottom: 20px;
 }
 
-th {
-  background: #f5f6fa !important;
-}
+
 .panel-header[data-v-654548ea] {
   /* padding-bottom: 20px; */
   padding: 16px;
@@ -1838,9 +1773,7 @@ table tbody tr {
   }
 }
 
-table tbody tr td {
-  font-family: "GoogleSans";
-}
+
 .summary {
   display: flex;
 }
@@ -2545,5 +2478,40 @@ table tr td:nth-child(7) {
 
 .alert {
   border-color: red !important;
+}
+.modal-content{
+    top: calc((100% - 620px) / 2) !important;
+    left: calc((100% - 980px) / 2) !important;
+    height: 620px !important;
+    width: 980px;
+}
+div#content[data-v-134d14cc] {
+    z-index: 1;
+    height: 600px;
+    width: 849px;
+    position: absolute;
+    top: calc((100% - 600px) / 2);
+    left: calc((100% - 847px) / 2);
+}
+.inputMoney {
+    border: 1px solid #d2d2d2;
+    height: 30px;
+    border-radius: 3px;
+    background-clip: padding-box;
+}
+.content {
+    background: #F5F6FA;
+}
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 16px;
+}
+.inputMoney:focus{
+  border: 1px solid black;
 }
 </style>

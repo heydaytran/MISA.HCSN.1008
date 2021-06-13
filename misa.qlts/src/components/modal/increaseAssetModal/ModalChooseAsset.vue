@@ -110,7 +110,7 @@
               >
                 nguyên giá
               </th>
-              <th class="hover-pointer" style="text-align: right">
+              <th title="Hao mòn, khấu hao lũy kế" class="hover-pointer" style="text-align: right">
                 HM/KM lũy kế
               </th>
               <th class="hover-pointer" style="text-align: right">
@@ -316,6 +316,7 @@ export default {
     },
     // todo hiển thị dialog
     show() {
+      this.inputSearch = ''
       this.listSelectRow = [];
       this.isChoose = true;
       document.getElementsByClassName("checkboxAll").forEach((element) => {
@@ -914,7 +915,7 @@ table tbody tr {
   right: 0px;
 
   animation-name: alert;
-  width: 220px;
+  width: 275px;
   animation-duration: 3s;
   white-space: nowrap;
   padding: 16px 0px;
@@ -923,11 +924,11 @@ table tbody tr {
 
 @keyframes alert {
   0% {
-    width: 220px;
+    width: 275px;
     padding: 16px;
   }
   50% {
-    width: 220px;
+    width: 275px;
     padding: 16px;
   }
   100% {
@@ -936,9 +937,6 @@ table tbody tr {
   }
 }
 
-table tbody tr td {
-  font-family: "GoogleSans";
-}
 .summary {
   display: flex;
 }
@@ -1414,5 +1412,27 @@ div#content{
     position: absolute;
     right: 38px;
     background: #1BA3C9;
+}
+.modal-background1 {
+  opacity: 0.6;
+}
+.content-nav {
+  padding-left: 6px;
+}
+.table-summary {
+  padding: 18px 20px;
+}
+table th:first-child{
+  padding-left: 20px;
+}
+table td:first-child{
+  padding-left: 20px;
+}
+.loading-emty {
+  font-size: 20px;
+}
+.table-summary{
+    padding: 18px 20px;
+    border-radius: 5px;
 }
 </style>

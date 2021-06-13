@@ -53,7 +53,7 @@ export default {
 @import url("style/scss/table.scss");
 @import url("style/scss/modal.scss");
 @import url("style/scss/date_picker.scss");
-
+/* 
 @font-face {
   font-family: GoogleSans;
   src: url("./assets/font/GoogleSans-Thin.otf");
@@ -69,7 +69,26 @@ export default {
 @font-face {
   font-family: GoogleSans-Medium;
   src: url("./assets/font/GoogleSans-Medium.otf");
+} */
+
+
+@font-face {
+  font-family: GoogleSans;
+  src: url("./assets/font/Roboto-Regular.ttf");
 }
+@font-face {
+  font-family: GoogleSans-Bold;
+  src: url("./assets/font/Roboto-Bold.ttf");
+}
+@font-face {
+  font-family: GoogleSans-Regular;
+  src: url("./assets/font/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: GoogleSans-Medium;
+  src: url("./assets/font/Roboto-Medium.ttf");
+}
+
 .div-container {
   width: 100%;
   height: 100%;
@@ -135,5 +154,11 @@ body {
 ::-webkit-scrollbar-track {
     background: transparent;
     margin-top: 40px;
+}
+table tbody tr td {
+  font-size: 13px!important;
+}
+table thead tr th{
+  background: #F5F5F5;
 }
 </style>

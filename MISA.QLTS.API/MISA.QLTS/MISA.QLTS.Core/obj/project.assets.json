@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\tvthinh\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tvthinh\\Desktop\\DeBaiGD2\\MISA.HCSN.1007\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj",
+      "projectUniqueName": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj",
       "projectName": "MISA.QLTS.Core",
-      "projectPath": "C:\\Users\\tvthinh\\Desktop\\DeBaiGD2\\MISA.HCSN.1007\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj",
-      "packagesPath": "C:\\Users\\tvthinh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tvthinh\\Desktop\\DeBaiGD2\\MISA.HCSN.1007\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\obj\\",
+      "projectPath": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tvthinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -60,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

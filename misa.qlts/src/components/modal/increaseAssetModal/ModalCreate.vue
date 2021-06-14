@@ -317,7 +317,7 @@
                           "
                           type="text"
                           v-model="item.originalPrice"
-                          :title="item.originalPrice"
+                          :title="validInputMoney == false? 'Nguyên giá phải lớn hơn lũy kế' : item.originalPrice"
                           v-money="money"
                           maxlength="20"
                           @keyup="updateResidual(item, $event, 'origin')"
@@ -1269,11 +1269,7 @@ th {
 .container-box {
   padding: 16px;
 }
-.modal-content[data-v-654548ea] {
-  top: calc((100% - 616px) / 2);
-  left: calc((100% - 880px) / 2);
-  height: 616px;
-}
+
 .modal-container {
   width: 100%;
   height: 45%;
@@ -1395,10 +1391,7 @@ td {
   width: 100%;
   height: 42%;
 }
-.modal-container.container-below {
-  height: 58%;
-  padding-top: 30px;
-}
+
 .footer-grid {
   display: flex;
   align-items: center;
@@ -2485,14 +2478,7 @@ table tr td:nth-child(7) {
     height: 620px !important;
     width: 980px;
 }
-div#content[data-v-134d14cc] {
-    z-index: 1;
-    height: 600px;
-    width: 849px;
-    position: absolute;
-    top: calc((100% - 600px) / 2);
-    left: calc((100% - 847px) / 2);
-}
+
 .inputMoney {
     border: 1px solid #d2d2d2;
     height: 30px;
@@ -2513,5 +2499,50 @@ div#content[data-v-134d14cc] {
 }
 .inputMoney:focus{
   border: 1px solid black;
+}
+
+.modal-content {
+    top: calc((100% - 88%) / 2) !important;
+    left: calc((100% - 75%px) / 2) !important;
+    height: 88% !important;
+    width: 75%;
+}
+.below-label {
+    display: flex;
+    align-items: center;
+}
+table tbody tr td {
+    border-bottom: 1px solid #f1f1f1;
+}
+input[type="text"]:focus{
+  border: 1px solid #00abfe;
+}
+.modal-container.container-below {
+    height: 69%!important;
+    padding-top: 8px;
+}
+.modal-container{
+    width: 100%;
+    height: 31%;
+}
+table th:nth-child(1)
+{
+  width: 4%;
+}
+
+table th:nth-child(2), th:nth-child(3)
+{
+  width: 10%;
+}
+th:nth-child(4){
+  width: 20%;
+}
+th:nth-child(8)
+{
+  width: 8%;
+}
+table th:nth-child(5), th:nth-child(6)
+{
+  width: 15%;
 }
 </style>

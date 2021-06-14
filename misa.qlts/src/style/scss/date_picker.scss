@@ -10,7 +10,7 @@
     font-family: "GoogleSans-Regular";
     font-size: 13px;
     width: 100%;
-    background-position: 184px center;
+    background-position: right center;
     cursor: pointer;
     outline: none;
     position: relative;
@@ -20,6 +20,7 @@
     height: 34px;
     border-radius: 2px;
     text-align: left;
+    border: none;
 }
 
 .mx-datepicker {
@@ -30,4 +31,8 @@
 
 input.datetime {
     text-align: left;
+}
+
+.mx-input-wrapper {
+    padding-right: 8px;
 }

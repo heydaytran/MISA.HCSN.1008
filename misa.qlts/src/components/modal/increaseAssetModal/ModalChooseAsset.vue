@@ -1385,14 +1385,7 @@ table tr td:nth-child(7), table th:nth-child(7){
     right: 31px!important;
     top: 14px!important;
 }
-div#content{
-  z-index: 1;
-    height: 660px;
-    width: 849px;
-    position: absolute;
-    top: calc((100% - 660px) / 2);
-    left: calc((100% - 847px) / 2);
-}
+
 .modal-background1 {
     position: fixed;
     top: 0;
@@ -1435,4 +1428,24 @@ table td:first-child{
     padding: 18px 20px;
     border-radius: 5px;
 }
-</style>
+div#content {
+    z-index: 1;
+    height: 73%;
+    width: 65%;
+    position: absolute;
+    top: calc((100% - 73%) / 2);
+    left: calc((100% - 65%) / 2);
+}
+table th:nth-child(1), th:nth-child(2)
+{
+  width: 4%;
+}
+
+table th:nth-child(3), th:nth-child(4)
+{
+  width: 10%;
+}
+th:nth-child(5){
+  width: 20%;
+}
+</style> 

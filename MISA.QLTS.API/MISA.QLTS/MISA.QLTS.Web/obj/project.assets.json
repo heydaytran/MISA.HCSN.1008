@@ -324,19 +324,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\tvthinh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Web\\MISA.QLTS.Web.csproj",
+      "projectUniqueName": "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Web\\MISA.QLTS.Web.csproj",
       "projectName": "MISA.QLTS.Web",
-      "projectPath": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Web\\MISA.QLTS.Web.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Web\\obj\\",
+      "projectPath": "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Web\\MISA.QLTS.Web.csproj",
+      "packagesPath": "C:\\Users\\tvthinh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tvthinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -350,11 +350,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj": {
-              "projectPath": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj"
+            "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj": {
+              "projectPath": "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Core\\MISA.QLTS.Core.csproj"
             },
-            "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj": {
-              "projectPath": "D:\\Users\\thinh\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj"
+            "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\tvthinh\\Desktop\\ThinhProject\\MISA.HCSN.1008\\MISA.QLTS.API\\MISA.QLTS\\MISA.QLTS.Infrastructure\\MISA.QLTS.Infrastructure.csproj"
             }
           }
         }
@@ -392,7 +392,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

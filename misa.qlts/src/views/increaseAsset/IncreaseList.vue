@@ -684,7 +684,7 @@ export default {
         if (text != "rowClick") {
           var index1 = this.listSelectRow.indexOf(id);
           if (index1 > -1) {
-            this.listSelectRow.splice(index, 1);
+            this.listSelectRow.splice(index1, 1);
           } else {
             this.listSelectRow.push(id);
             // this.indexDetail = this.listAssetIncreaseId.indexOf(
@@ -2103,5 +2103,24 @@ font-size: 16px!important;
     width: 280px;
     padding-right: 0;
     border-radius: 4px!important;
+}
+.content-grid-detail{
+  table th:nth-child(1)
+{
+  width: 4%;
+}
+
+table th:nth-child(2), th:nth-child(3)
+{
+  width: 20%;
+}
+th:nth-child(4){
+  width: 20%;
+}
+
+table th:nth-child(5)
+{
+  width: 20%;
+}
 }
 </style>

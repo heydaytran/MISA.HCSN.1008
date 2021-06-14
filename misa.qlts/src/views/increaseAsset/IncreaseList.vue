@@ -2107,18 +2107,18 @@ font-size: 16px!important;
 .content-grid-detail{
   table th:nth-child(1)
 {
-  width: 4%;
+  width: 5%;
 }
 
 table th:nth-child(2), th:nth-child(3)
 {
-  width: 20%;
+  width: 15%;
 }
 th:nth-child(4){
   width: 20%;
 }
 
-table th:nth-child(5)
+table th:nth-child(5), th:nth-child(6)
 {
   width: 20%;
 }

@@ -308,7 +308,6 @@
                       </td>
                       <td style="text-align: right; text-overflow: unset">
                         <input
-                          id="origin-price"
                           class="inputMoney"
                           style="
                             width: 114px;
@@ -317,7 +316,7 @@
                           "
                           type="text"
                           v-model="item.originalPrice"
-                          :title="validInputMoney == false? 'Nguyên giá phải lớn hơn lũy kế' : item.originalPrice"
+                          :title="item.originalPrice > item.wearValue? item.originalPrice :'Yêu cầu nguyên giá lớn hơn lũy kế'"
                           v-money="money"
                           maxlength="20"
                           @keyup="updateResidual(item, $event, 'origin')"
@@ -327,7 +326,6 @@
                       </td>
                       <td style="text-align: right; text-overflow: unset">
                         <input
-                          id="wear-value"
                           style="
                             width: 103px;
                             text-align: right;
@@ -337,7 +335,7 @@
                           onClick="this.select();"
                           class="inputMoney"
                           v-model="item.wearValue"
-                          :title="item.wearValue"
+                          :title="item.originalPrice > item.wearValue? item.wearValue :'Yêu cầu nguyên giá lớn hơn lũy kế'"
                           v-money="money"
                           maxlength="20"
                           @keyup="updateResidual(item, $event, 'wear')"
@@ -605,6 +603,9 @@ export default {
       document.getElementsByClassName("required").forEach((element) => {
         element.style.border = "1px solid #e4e4e4";
         element.classList.remove("hover-validate");
+        document.getElementsByClassName('inputMoney').forEach(el => {
+          el.classList.remove('alert')
+        })
       });
       this.dup = false;
 
@@ -2514,9 +2515,7 @@ table tr td:nth-child(7) {
 table tbody tr td {
     border-bottom: 1px solid #f1f1f1;
 }
-input[type="text"]:focus{
-  border: 1px solid #00abfe;
-}
+
 .modal-container.container-below {
     height: 69%!important;
     padding-top: 8px;

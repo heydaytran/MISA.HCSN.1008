@@ -348,10 +348,7 @@ export default {
         this.paging.pageNumber = 1;
         
       }
-      else if(text == 'pageChange')
-      {
-        console.log('hello');
-      }
+      
       else{
         this.listSelectRow = [];
       }
